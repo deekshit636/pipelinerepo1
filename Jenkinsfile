@@ -1,5 +1,8 @@
 pipeline{
 agent any
+  environment {
+  env1 = "defaults vadue"
+}
   stages{
     stage('BUILD'){
       steps{
