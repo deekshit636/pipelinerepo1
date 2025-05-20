@@ -7,6 +7,7 @@ agent any
     stage('BUILD'){
       steps{
         echo 'ths ia build projecta'
+        echo "this is env variable value: ${env.env1}"
       }
     }
     stage('DEPLOY'){
