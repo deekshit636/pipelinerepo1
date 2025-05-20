@@ -3,6 +3,9 @@ agent any
   environment {
   env1 = "defaults vadue"
 }
+  parameters {
+  string defaultValue: 'De\\\\fault value', description: 'default value for parameter', name: 'Name', trim: true
+}
   stages{
     stage('BUILD'){
       steps{
@@ -13,6 +16,7 @@ agent any
     stage('DEPLOY'){
       steps{
         echo 'deploy stage uanni'
+        echo "Value of parameter 'name' is: ${params.Name}"
 }
 }
   }
