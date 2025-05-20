@@ -8,9 +8,7 @@ pipeline {
         }
         stage('Approval') {
             steps {
-                input {
-                    message "Do you want to deploy to production?"
-                }
+                input message: "Do you want to deploy to production?"
             }
         }
         stage('Deploy') {
