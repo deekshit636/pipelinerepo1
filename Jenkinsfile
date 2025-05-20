@@ -6,5 +6,10 @@ agent any
         echo 'ths ia build projecta'
       }
     }
+    stage('DEPLOY'){
+      steps{
+        echo 'deploy stage uanni'
+}
+}
   }
 }
