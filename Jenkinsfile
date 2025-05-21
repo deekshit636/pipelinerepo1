@@ -1,8 +1,9 @@
 pipeline {
     agent any
 parameters {
-  file '/home/ubuntu/dir1'
+  password defaultValue: '123', name: 'myPassvar'
 }
+
     stages {
         stage('Build') {
             steps {
