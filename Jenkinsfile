@@ -1,9 +1,8 @@
 pipeline {
     agent any
- parameters {
-  choice choices: ['apple', 'banana'], name: 'MychoicePara'
+parameters {
+  file '/home/ubuntu/dir1'
 }
-
     stages {
         stage('Build') {
             steps {
