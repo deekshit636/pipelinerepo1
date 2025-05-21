@@ -1,8 +1,9 @@
 pipeline {
     agent any
 parameters {
-  string defaultValue: '20', name: 'abc'
+  text defaultValue: 'value hhere', name: 'textPara1'
 }
+
 
 
     stages {
