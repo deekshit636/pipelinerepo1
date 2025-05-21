@@ -1,7 +1,7 @@
 pipeline {
     agent any
 parameters {
-  run filter: 'ALL', name: 'runParam2', projectName: 'pipelinejob1'
+  string defaultValue: '20', name: 'abc'
 }
 
 
