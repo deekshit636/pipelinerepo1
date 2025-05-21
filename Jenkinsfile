@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    parameters {
+  booleanParam defaultValue: true, name: 'booleanPara1'
+}
     stages {
         stage('Build') {
             steps {
@@ -8,7 +11,7 @@ pipeline {
         }
         stage('Approval') {
             steps {
-                input message: "Do you want to deploy to production?"
+                echo 'Approval stage'
             }
         }
         stage('Deploy') {
