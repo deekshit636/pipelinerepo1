@@ -1,8 +1,9 @@
 pipeline {
     agent any
 parameters {
-  password defaultValue: '123', name: 'myPassvar'
+  run filter: 'ALL', name: 'runParam2', projectName: 'pipelinejob1'
 }
+
 
     stages {
         stage('Build') {
