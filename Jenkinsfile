@@ -1,8 +1,9 @@
 pipeline {
     agent any
-    parameters {
-  booleanParam defaultValue: true, name: 'booleanPara1'
+ parameters {
+  choice choices: ['apple', 'banana'], name: 'MychoicePara'
 }
+
     stages {
         stage('Build') {
             steps {
