@@ -2,71 +2,50 @@ pipeline {
     agent any
 
     environment {
-        BINARY_NAME = "ABC.exe"
+        PROJECT_DIR = 'c-project'
+        BINARY_NAME = 'ABC.exe'
     }
 
     stages {
-        stage('Clone Repository') {
+        stage('Checkout Pipeline Repo') {
             steps {
-                git url: 'https://github.com/deekshit636/c-proj-repo.git'
+                echo 'Using Jenkinsfile from pipelinerepo1'
+                // This is done automatically in a multibranch pipeline or Git trigger
+            }
+        }
+
+        stage('Clone C Project Repo') {
+            steps {
+                sh '''
+                    rm -rf ${PROJECT_DIR}
+                    git clone -b main https://github.com/deekshit636/c-proj-repo.git ${PROJECT_DIR}
+                '''
             }
         }
 
         stage('Build with Makefile') {
             steps {
-                sh 'make'
+                dir("${PROJECT_DIR}") {
+                    sh 'make'
+                }
             }
         }
 
         stage('Run Binary') {
             steps {
-                sh './${BINARY_NAME} || echo "${BINARY_NAME} exited with non-zero status"'
+                dir("${PROJECT_DIR}") {
+                    sh './${BINARY_NAME} || echo "${BINARY_NAME} exited with non-zero status"'
+                }
             }
         }
     }
 
     post {
         success {
-            echo 'Build and execution completed successfully!'
+            echo 'Pipeline completed successfully!'
         }
         failure {
-            echo 'Build or execution failed. Check console output.'
-        }
-    }
-}
-pipeline {
-    agent any
-
-    environment {
-        BINARY_NAME = "ABC.exe"
-    }
-
-    stages {
-        stage('Clone Repository') {
-            steps {
-                git url: 'https://github.com/deekshit636/c-proj-repo.git'
-            }
-        }
-
-        stage('Build with Makefile') {
-            steps {
-                sh 'make'
-            }
-        }
-
-        stage('Run Binary') {
-            steps {
-                sh './${BINARY_NAME} || echo "${BINARY_NAME} exited with non-zero status"'
-            }
-        }
-    }
-
-    post {
-        success {
-            echo 'Build and execution completed successfully!'
-        }
-        failure {
-            echo 'Build or execution failed. Check console output.'
+            echo 'Pipeline failed. Check logs.'
         }
     }
 }
